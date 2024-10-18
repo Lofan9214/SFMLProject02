@@ -3,8 +3,8 @@
 #include <unordered_map>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
-#include <SFML/Window/Window.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <SFML/Window/Window.hpp>
 
 class InputMgr
 {
@@ -28,6 +28,6 @@ public:
 	static bool isMouseButtonPressing(const sf::Mouse::Button& btn);
 	static bool isMouseButtonUp(const sf::Mouse::Button& btn);
 
-	static sf::Vector2i getMousePosition();
+	static sf::Vector2i getMousePosition(const sf::Window& curWindow);
 };
 

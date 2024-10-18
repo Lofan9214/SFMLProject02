@@ -137,9 +137,9 @@ bool InputMgr::isMouseButtonUp(const sf::Mouse::Button& btn)
 	return it->second[(int)State::Release];
 }
 
-sf::Vector2i InputMgr::getMousePosition()
+sf::Vector2i InputMgr::getMousePosition(const sf::Window& curWindow)
 {
-	return sf::Mouse::getPosition();
+	return sf::Mouse::getPosition(curWindow);
 }
 
 
