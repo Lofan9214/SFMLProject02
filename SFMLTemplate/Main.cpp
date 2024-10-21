@@ -16,7 +16,7 @@ int main()
 	while (window.isOpen())
 	{
 		sf::Event event;
-		InputMgr::Clear();
+		InputMgr::clear();
 
 		while (window.pollEvent(event))
 		{
@@ -29,7 +29,7 @@ int main()
 				break;
 			}
 
-			InputMgr::UpdateEvent(event);
+			InputMgr::updateEvent(event);
 		}
 
 		if (InputMgr::isKeyDown(sf::Keyboard::Left))

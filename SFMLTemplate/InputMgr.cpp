@@ -1,140 +1,86 @@
 #include "InputMgr.h"
 
-std::unordered_map<int, std::bitset<3>> InputMgr::mapInput;
+std::vector<std::bitset<3>> InputMgr::vecInput(sf::Keyboard::KeyCount + sf::Mouse::ButtonCount, 0);
 
-void InputMgr::Clear()
+void InputMgr::clear()
 {
 	std::bitset<3> remover = 0;
 	remover[(int)State::Pressing] = true;
 
-	for (auto& it : mapInput)
+	for (auto& it : vecInput)
 	{
-		it.second &= remover;
+		it &= remover;
 	}
 }
 
-void InputMgr::UpdateEvent(const sf::Event& ev)
+void InputMgr::updateEvent(const sf::Event& ev)
 {
-	std::unordered_map<int, std::bitset<3>>::iterator itInput = mapInput.end();
+	std::vector<std::bitset<3>>::iterator itInput = vecInput.end();
 	std::bitset<3> setter = 0;
+	int idx;
 
 	switch (ev.type)
 	{
 	case sf::Event::KeyPressed:
-		itInput = mapInput.find(ev.key.code);
+		idx = ev.key.code;
+		itInput = vecInput.begin() + idx;
 		setter[(int)State::Down] = true;
 		setter[(int)State::Pressing] = true;
 
-		if (itInput != mapInput.end())
-		{
-			itInput->second = setter;
-		}
-		else
-		{
-			mapInput.insert({ (int)(ev.key.code), setter });
-		}
-		break;
+		*itInput = setter;
 	case sf::Event::KeyReleased:
-		itInput = mapInput.find(ev.key.code);
+		idx = ev.key.code;
+		itInput = vecInput.begin() + idx;
 		setter[(int)State::Release] = true;
 
-		if (itInput != mapInput.end())
-		{
-			itInput->second = setter;
-		}
-		else
-		{
-			mapInput.insert({ (int)(ev.key.code), setter });
-		}
+		*itInput = setter;
 		break;
 	case sf::Event::MouseButtonPressed:
-		itInput = mapInput.find(-(ev.mouseButton.button + 1));
+		idx = sf::Keyboard::KeyCount + ev.mouseButton.button;
+		itInput = vecInput.begin() + idx;
 		setter[(int)State::Down] = true;
 		setter[(int)State::Pressing] = true;
 
-		if (itInput != mapInput.end())
-		{
-			itInput->second = setter;
-		}
-		else
-		{
-			mapInput.insert({ -(ev.mouseButton.button + 1), setter });
-		}
+		*itInput = setter;
+
 		break;
 	case sf::Event::MouseButtonReleased:
-		itInput = mapInput.find(-(ev.mouseButton.button + 1));
+		idx = sf::Keyboard::KeyCount + ev.mouseButton.button;
+		itInput = vecInput.begin() + idx;
 		setter[(int)State::Release] = true;
-
-		if (itInput != mapInput.end())
-		{
-			itInput->second = setter;
-		}
-		else
-		{
-			mapInput.insert({ -(ev.mouseButton.button + 1), setter });
-		}
+		*itInput = setter;
 		break;
 	}
 }
 
 bool InputMgr::isKeyDown(const sf::Keyboard::Key& key)
 {
-	auto it = mapInput.find(key);
-	if (it == mapInput.end())
-	{
-		return false;
-	}
-	return it->second[(int)State::Down];
+	return (*(vecInput.begin() + key))[(int)State::Down];
 }
 
 bool InputMgr::isKeyPressing(const sf::Keyboard::Key& key)
 {
-	auto it = mapInput.find(key);
-	if (it == mapInput.end())
-	{
-		return false;
-	}
-	return it->second[(int)State::Pressing];
+	return (*(vecInput.begin() + key))[(int)State::Pressing];
 }
 
 bool InputMgr::isKeyUp(const sf::Keyboard::Key& key)
 {
-	auto it = mapInput.find(key);
-	if (it == mapInput.end())
-	{
-		return false;
-	}
-	return it->second[(int)State::Release];
+	return (*(vecInput.begin() + key))[(int)State::Release];
 }
 
 bool InputMgr::isMouseButtonDown(const sf::Mouse::Button& btn)
 {
-	auto it = mapInput.find(-(btn + 1));
-	if (it == mapInput.end())
-	{
-		return false;
-	}
-	return it->second[(int)State::Down];
+	return (*(vecInput.begin() + sf::Keyboard::KeyCount + btn))[(int)State::Down];
 }
 
 bool InputMgr::isMouseButtonPressing(const sf::Mouse::Button& btn)
 {
-	auto it = mapInput.find(-(btn + 1));
-	if (it == mapInput.end())
-	{
-		return false;
-	}
-	return it->second[(int)State::Pressing];
+	return (*(vecInput.begin() + sf::Keyboard::KeyCount + btn))[(int)State::Pressing];
 }
 
 bool InputMgr::isMouseButtonUp(const sf::Mouse::Button& btn)
 {
-	auto it = mapInput.find(-(btn + 1));
-	if (it == mapInput.end())
-	{
-		return false;
-	}
-	return it->second[(int)State::Release];
+	return (*(vecInput.begin() + sf::Keyboard::KeyCount + btn))[(int)State::Release];
 }
 
 sf::Vector2i InputMgr::getMousePosition(const sf::Window& curWindow)

@@ -1,6 +1,6 @@
 #pragma once
 #include <bitset>
-#include <unordered_map>
+#include <vector>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Mouse.hpp>
@@ -15,10 +15,12 @@ private:
 		Down,
 		Pressing,
 	};
-	static std::unordered_map<int, std::bitset<3>> mapInput;
+	
+	static std::vector<std::bitset<3>> vecInput;
 public:
-	static void Clear();
-	static void UpdateEvent(const sf::Event& ev);
+	static void init();
+	static void clear();
+	static void updateEvent(const sf::Event& ev);
 
 	static bool isKeyDown(const sf::Keyboard::Key& key);
 	static bool isKeyPressing(const sf::Keyboard::Key& key);
@@ -30,4 +32,3 @@ public:
 
 	static sf::Vector2i getMousePosition(const sf::Window& curWindow);
 };
-
