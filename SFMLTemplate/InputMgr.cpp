@@ -15,7 +15,7 @@ void InputMgr::clear()
 
 void InputMgr::updateEvent(const sf::Event& ev)
 {
-	std::vector<std::bitset<3>>::iterator itInput = vecInput.end();
+	std::vector<std::bitset<3>>::iterator itInput;
 	std::bitset<3> setter = 0;
 	int idx;
 
@@ -24,30 +24,30 @@ void InputMgr::updateEvent(const sf::Event& ev)
 	case sf::Event::KeyPressed:
 		idx = ev.key.code;
 		itInput = vecInput.begin() + idx;
-		setter[(int)State::Down] = true;
+		setter[(int)State::Down] = !(*itInput)[(int)State::Pressing];
 		setter[(int)State::Pressing] = true;
 
 		*itInput = setter;
+		break;
 	case sf::Event::KeyReleased:
 		idx = ev.key.code;
 		itInput = vecInput.begin() + idx;
-		setter[(int)State::Release] = true;
+		setter[(int)State::Release] = (*itInput)[(int)State::Pressing];
 
 		*itInput = setter;
 		break;
 	case sf::Event::MouseButtonPressed:
 		idx = sf::Keyboard::KeyCount + ev.mouseButton.button;
 		itInput = vecInput.begin() + idx;
-		setter[(int)State::Down] = true;
+		setter[(int)State::Down] = !(*itInput)[(int)State::Pressing];
 		setter[(int)State::Pressing] = true;
-
 		*itInput = setter;
 
 		break;
 	case sf::Event::MouseButtonReleased:
 		idx = sf::Keyboard::KeyCount + ev.mouseButton.button;
 		itInput = vecInput.begin() + idx;
-		setter[(int)State::Release] = true;
+		setter[(int)State::Release] = (*itInput)[(int)State::Pressing];
 		*itInput = setter;
 		break;
 	}
