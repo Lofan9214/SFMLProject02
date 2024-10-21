@@ -1,7 +1,4 @@
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include "InputMgr.h"
-#include "ResourceMgr.h"
+#include "stdafx.h"
 
 int main()
 {
@@ -39,6 +36,22 @@ int main()
 		if (InputMgr::isKeyUp(sf::Keyboard::Left))
 		{
 			std::cout << "LeftUp" << std::endl;
+		}
+		if (InputMgr::isKeyDown(sf::Keyboard::A))
+		{
+			std::cout << "ADown" << std::endl;
+		}
+		if (InputMgr::isKeyUp(sf::Keyboard::A))
+		{
+			std::cout << "AUp" << std::endl;
+		}
+		if (InputMgr::isKeyDown(sf::Keyboard::B))
+		{
+			std::cout << "BDown" << std::endl;
+		}
+		if (InputMgr::isKeyUp(sf::Keyboard::B))
+		{
+			std::cout << "BUp" << std::endl;
 		}
 		if (InputMgr::isMouseButtonDown(sf::Mouse::Left))
 		{

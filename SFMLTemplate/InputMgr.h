@@ -1,10 +1,4 @@
 #pragma once
-#include <bitset>
-#include <vector>
-#include <SFML/Window/Keyboard.hpp>
-#include <SFML/Window/Event.hpp>
-#include <SFML/Window/Mouse.hpp>
-#include <SFML/Window/Window.hpp>
 
 class InputMgr
 {
@@ -18,7 +12,6 @@ private:
 	
 	static std::vector<std::bitset<3>> vecInput;
 public:
-	static void init();
 	static void clear();
 	static void updateEvent(const sf::Event& ev);
 
