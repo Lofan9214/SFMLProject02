@@ -3,15 +3,29 @@
 
 class SceneMgr : public Singleton<SceneMgr>
 {
+	friend Singleton<SceneMgr>;
 protected:
-	std::vector<Scene*> scenes;
+	std::vector<Scene*> vecScenes;
 
-public:
+	SceneIds defaultScene = SceneIds::Dev1;
+	SceneIds currentScene;
+
 	SceneMgr() = default;
 	virtual ~SceneMgr() = default;
 
+	SceneMgr(const SceneMgr&) = delete;
+	SceneMgr& operator=(const SceneMgr&) = delete;
+
+public:
+
 	void init();
-	void dothis();
 	void release();
+
+	void update(float deltaTime);
+	void draw(sf::RenderWindow& window);
+
+	SceneIds getCurrentScene() const { return currentScene; }
+	void setCurrentScene(SceneIds id);
+
 };
 

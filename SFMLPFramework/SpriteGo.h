@@ -9,7 +9,7 @@ public:
 	SpriteGo() = default;
 	~SpriteGo() = default;
 
-	SpriteGo(const std::string& iTexId);
+	SpriteGo(const std::string& iTexId, const std::string& name = "");
 
 	void setPosition(const sf::Vector2f& iPos) override;
 	void setRotation(const float irad);
