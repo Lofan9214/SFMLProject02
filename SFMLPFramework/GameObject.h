@@ -6,8 +6,8 @@ protected:
 	bool bActive = true;
 	sf::Vector2f vfPosition;
 
-	GameObject(const GameObject& obj) = delete;
-	GameObject& operator=(const GameObject& obj) = delete;
+	GameObject(const GameObject&) = delete;
+	GameObject& operator=(const GameObject&) = delete;
 
 public:
 

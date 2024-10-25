@@ -10,6 +10,19 @@ void Framework::dothis()
 {
 	sf::Event ev;
 	sf::Time dt;
+
+	TEXTUREMGR.Load("graphics/background.png");
+	TEXTUREMGR.Load("graphics/axe.png");
+
+	SpriteGo sprBG("graphics/background.png");
+	sprBG.init();
+	sprBG.reset();
+
+	SpriteGo sprAx("graphics/axe.png");
+	sprAx.init();
+	sprAx.reset();
+
+
 	while (window.isOpen())
 	{
 		dt = clock.restart();
@@ -33,15 +46,19 @@ void Framework::dothis()
 
 #pragma region 객체 업데이트
 
+		sprBG.update(gameDeltaTime);
 
+		sprAx.setPosition({ 960.f, 540.f });
+		sprAx.setRotation(135);
 
 #pragma endregion 객체 업데이트
 
 #pragma region 객체 드로우
 		window.clear();
 
-
-
+		sprBG.draw(window);
+		sprAx.draw(window);
+		sprAx.drawrect(window);
 		window.display();
 #pragma endregion 객체 드로우
 	}

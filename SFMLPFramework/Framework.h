@@ -9,8 +9,8 @@ protected:
 	Framework() = default;
 	virtual ~Framework() = default;
 
-	Framework(const Framework& fw) = delete;
-	Framework& operator=(const Framework& fw) = delete;
+	Framework(const Framework&) = delete;
+	Framework& operator=(const Framework&) = delete;
 
 	sf::RenderWindow window;
 

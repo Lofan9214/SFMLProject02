@@ -82,7 +82,7 @@ bool InputMgr::isMouseButtonUp(const sf::Mouse::Button& btn)
 	return vecInput[sf::Keyboard::KeyCount + btn][(int)State::Release];
 }
 
-sf::Vector2i InputMgr::getMousePosition(const sf::Window& curWindow)
+sf::Vector2i InputMgr::getMousePosition(const sf::RenderWindow& curWindow)
 {
 	return sf::Mouse::getPosition(curWindow);
 }

@@ -15,3 +15,4 @@
 
 #include "InputMgr.h"
 #include "GameObject.h"
+#include "SpriteGo.h"

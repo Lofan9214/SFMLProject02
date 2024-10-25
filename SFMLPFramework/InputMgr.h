@@ -23,5 +23,5 @@ public:
 	static bool isMouseButtonPressing(const sf::Mouse::Button& btn);
 	static bool isMouseButtonUp(const sf::Mouse::Button& btn);
 
-	static sf::Vector2i getMousePosition(const sf::Window& curWindow);
+	static sf::Vector2i getMousePosition(const sf::RenderWindow& curWindow);
 };

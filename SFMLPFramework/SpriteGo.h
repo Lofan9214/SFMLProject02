@@ -12,8 +12,10 @@ public:
 	SpriteGo(const std::string& iTexId);
 
 	void setPosition(const sf::Vector2f& iPos) override;
+	void setRotation(const float irad);
 
 	void reset() override;
 	void draw(sf::RenderWindow& window) override;
+	void drawrect(sf::RenderWindow& window);
 };
 
