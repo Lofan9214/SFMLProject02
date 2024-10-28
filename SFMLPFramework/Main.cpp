@@ -2,8 +2,8 @@
 
 int main()
 {
-	FRAMEWORK.init(1920,1080,"霸烙 力格");
-	FRAMEWORK.dothis();
-	FRAMEWORK.release();
+	Framework::Instance().init(1920,1080,"霸烙 力格");
+	Framework::Instance().dothis();
+	Framework::Instance().release();
 	return 0;
 }

@@ -4,24 +4,16 @@
 void Framework::init(int width, int height, const std::string& strTitle)
 {
 	window.create(sf::VideoMode(width, height), strTitle);
+
+	Utilities::init();
+
+	SceneMgr::Instance().init();
 }
 
 void Framework::dothis()
 {
 	sf::Event ev;
 	sf::Time dt;
-
-	TEXTUREMGR.Load("graphics/background.png");
-	TEXTUREMGR.Load("graphics/axe.png");
-
-	SpriteGo sprBG("graphics/background.png");
-	sprBG.init();
-	sprBG.reset();
-
-	SpriteGo sprAx("graphics/axe.png");
-	sprAx.init();
-	sprAx.reset();
-
 
 	while (window.isOpen())
 	{
@@ -42,28 +34,25 @@ void Framework::dothis()
 
 			InputMgr::updateEvent(ev);
 		}
-#pragma endregion 이벤트 처리 루프
+#pragma endregion
 
 #pragma region 객체 업데이트
 
-		sprBG.update(gameDeltaTime);
+		SceneMgr::Instance().update(gameDeltaTime);
 
-		sprAx.setPosition({ 960.f, 540.f });
-		sprAx.setRotation(135);
-
-#pragma endregion 객체 업데이트
+#pragma endregion
 
 #pragma region 객체 드로우
 		window.clear();
 
-		sprBG.draw(window);
-		sprAx.draw(window);
-		sprAx.drawrect(window);
+		SceneMgr::Instance().draw(window);
+
 		window.display();
-#pragma endregion 객체 드로우
+#pragma endregion
 	}
 }
 
 void Framework::release()
 {
+	SceneMgr::Instance().release();
 }

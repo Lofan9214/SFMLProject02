@@ -11,6 +11,9 @@ void InputMgr::clear()
 	{
 		it &= remover;
 	}
+
+	remover[(int)State::Pressing] = true;
+
 }
 
 void InputMgr::updateEvent(const sf::Event& ev)

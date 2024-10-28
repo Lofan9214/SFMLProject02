@@ -19,3 +19,11 @@ enum class Origins
 	BL, BC, BR,
 	Custom,
 };
+
+enum class Sides
+{
+	Rand,
+	None,
+	Left,
+	Right,
+};

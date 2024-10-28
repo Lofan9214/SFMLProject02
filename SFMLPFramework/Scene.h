@@ -24,14 +24,24 @@ public:
 	template<typename T>
 	T* addGo(T* obj)
 	{
-		if (std::find(gameObjects.begin(), gameObjects.end(), obj) == gameObjects.end())
+		if (std::find(lstGameObj.begin(), lstGameObj.end(), obj) == lstGameObj.end())
 		{
-			gameObjects.push_back(obj);
+			lstGameObj.push_back(obj);
 		}
 		return obj;
 	}
 
 	virtual void removeGo(GameObject* obj);
+
+	template<typename T>
+	void removeGo(std::list<T*> lstobj)
+	{
+		for (auto obj : lstobj)
+		{
+			lstGameObj.remove(obj);
+		}
+	}
+
 	virtual GameObject* findGo(const std::string& name);
 	virtual int FindGoAll(const std::string& name, std::list<GameObject*>& list);
 };

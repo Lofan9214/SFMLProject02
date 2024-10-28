@@ -31,3 +31,21 @@ void GameObject::setOrigin(Origins iOrigin)
 	eOrigin = iOrigin;
 	vOrigin = { 0.f,0.f };
 }
+
+void GameObject::setFlipX(bool flipx)
+{
+	bFlipX = flipx;
+	if ((bFlipX && vScale.x > 0) || (!bFlipX && vScale.x < 0))
+	{
+		vScale.x = -vScale.x;
+	}
+}
+
+void GameObject::setFlipY(bool flipy)
+{
+	bFlipY = flipy;
+	if ((bFlipY && vScale.y > 0) || (!bFlipY && vScale.y < 0))
+	{
+		vScale.y = -vScale.y;
+	}
+}

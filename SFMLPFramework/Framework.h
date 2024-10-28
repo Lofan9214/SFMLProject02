@@ -36,5 +36,3 @@ public:
 	virtual void dothis();
 	virtual void release();
 };
-
-#define FRAMEWORK (Framework::Instance())

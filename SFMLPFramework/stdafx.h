@@ -14,6 +14,8 @@
 #include "Singleton.h"
 #include "ResourceMgr.h"
 #include "Framework.h"
+#include "Utilities.h"
+#include "ObjectPool.h"
 
 #include "InputMgr.h"
 #include "GameObject.h"

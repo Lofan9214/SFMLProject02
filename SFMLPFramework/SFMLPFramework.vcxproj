@@ -144,6 +144,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BeeGo.cpp" />
+    <ClCompile Include="BranchGo.cpp" />
+    <ClCompile Include="CloudGo.cpp" />
+    <ClCompile Include="EffectLog.cpp" />
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputMgr.cpp" />
@@ -157,13 +161,19 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TextGo.cpp" />
+    <ClCompile Include="TreeGo.cpp" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BeeGo.h" />
+    <ClInclude Include="BranchGo.h" />
+    <ClInclude Include="CloudGo.h" />
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="EffectLog.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputMgr.h" />
+    <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ResourceMgr.h" />
     <ClInclude Include="SceneDev1.h" />
     <ClInclude Include="SceneDev2.h" />
@@ -173,6 +183,7 @@
     <ClInclude Include="SpriteGo.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextGo.h" />
+    <ClInclude Include="TreeGo.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

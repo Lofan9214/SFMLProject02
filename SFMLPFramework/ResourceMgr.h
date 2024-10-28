@@ -86,5 +86,3 @@ inline T& ResourceMgr<T>::Get(const std::string& id)
 
 template<typename T>
 T ResourceMgr<T>::Empty;
-
-#define TEXTUREMGR (ResourceMgr<sf::Texture>::Instance())

@@ -24,7 +24,8 @@ public:
 	void update(float deltaTime);
 	void draw(sf::RenderWindow& window);
 
-	SceneIds getCurrentScene() const { return currentScene; }
+	Scene* getCurrentScene() { return vecScenes[(int)currentScene]; }
+	SceneIds getCurrentSceneId() const { return currentScene; }
 	void setCurrentScene(SceneIds id);
 
 };

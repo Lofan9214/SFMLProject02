@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "SpriteGo.h"
 
-SpriteGo::SpriteGo(const std::string& iTexId)
-	:textureId(iTexId)
+SpriteGo::SpriteGo(const std::string& iTexId, const std::string& name)
+	:textureId(iTexId), GameObject(name)
 {
 
 }
@@ -15,13 +15,43 @@ void SpriteGo::setPosition(const sf::Vector2f& iPos)
 
 void SpriteGo::setRotation(const float irad)
 {
-	sprite.setRotation(irad);
+	fRotation = irad;
+	sprite.setRotation(irad * 180 / Utilities::PI);
+}
+
+void SpriteGo::setOrigin(Origins preset)
+{
+	if (preset < Origins::Custom)
+	{
+		eOrigin = preset;
+		vOrigin = Utilities::SetOrigin(sprite, preset);
+	}
+}
+
+void SpriteGo::setOrigin(const sf::Vector2f& neworigin)
+{
+	eOrigin = Origins::Custom;
+	sprite.setOrigin(neworigin);
+}
+
+void SpriteGo::setFlipX(bool flipX)
+{
+	GameObject::setFlipX(flipX);
+	sprite.setScale(vScale);
+}
+
+void SpriteGo::setFlipY(bool flipY)
+{
+	GameObject::setFlipX(flipY);
+	sprite.setScale(vScale);
 }
 
 void SpriteGo::reset()
 {
-	auto& texResMgr = TEXTUREMGR;
+	auto& texResMgr = ResourceMgr<sf::Texture>::Instance();
 	sprite.setTexture(texResMgr.Get(textureId));
+	sprite.setScale(vScale);
+	setOrigin(eOrigin);
 }
 
 void SpriteGo::draw(sf::RenderWindow& window)

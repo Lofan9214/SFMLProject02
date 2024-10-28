@@ -5,15 +5,19 @@ class TextGo :
 {
 protected:
 	sf::Text text;
-	std::string fontId;
+	std::string strFontId;
 
 	TextGo() = delete;
 public:
 	~TextGo() = default;
 	TextGo(const std::string& fontId, const std::string& name = "");
 
-	void setOrigin(Origins preset) override;
-	void 
+	void reset() override;
+	void draw(sf::RenderWindow& window) override;
 
+	void setOrigin(Origins preset) override;
+	void setOrigin(const sf::Vector2f& neworigin) override;
+
+	void setString(const std::string& strChange);
 };
 

@@ -29,7 +29,7 @@ void SceneDev2::update(float dt)
 {
 	if (InputMgr::isKeyDown(sf::Keyboard::Space))
 	{
-		scenemgr.changeScene(SceneIds::Dev1);
+		SceneMgr::Instance().setCurrentScene(SceneIds::Dev1);
 	}
 
 	Scene::update(dt);

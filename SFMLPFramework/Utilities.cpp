@@ -62,3 +62,13 @@ sf::Vector2f Utilities::randInUnitCircle()
 {
 	return randOnUnitCircle() * rand0to1();
 }
+
+float Utilities::rad2deg(float iRad)
+{
+	return iRad * 180.f / Utilities::PI;
+}
+
+float Utilities::deg2rad(float iDeg)
+{
+	return iDeg / 180.f * Utilities::PI;
+}

@@ -13,6 +13,9 @@ protected:
 	sf::Vector2f vPosition;
 	float fRotation;
 	sf::Vector2f vScale;
+	bool bFlipX = false;
+	bool bFlipY = false;
+
 
 	GameObject(const GameObject&) = delete;
 	GameObject& operator=(const GameObject&) = delete;
@@ -39,7 +42,7 @@ public:
 	void setName(const std::string& iName) { name = iName; }
 
 	sf::Vector2f getOrigin() const { return vOrigin; }
-	void setOrigin(Origins iOrigin);
+	virtual void setOrigin(Origins iOrigin);
 	virtual void setOrigin(const sf::Vector2f& iOrigin)
 	{
 		vOrigin = iOrigin;
@@ -54,6 +57,11 @@ public:
 
 	sf::Vector2f getScale() const { return vScale; }
 	void setScale(const sf::Vector2f iScale) { vScale = iScale; }
+
+	virtual bool getFlipX() const { return bFlipX; }
+	virtual void setFlipX(bool flipx);
+	virtual bool getFlipY() const { return bFlipY; }
+	virtual void setFlipY(bool flipy);
 
 };
 
