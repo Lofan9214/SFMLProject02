@@ -55,15 +55,15 @@ void TreeGo::init()
 {
 	release();
 
-	sprTree.setTexture(ResourceMgr<sf::Texture>::Instance().Get(treeTextureId), true);
-	Utilities::SetOrigin(sprTree, Origins::BC);
+	sprTree.setTexture(ResourceMgr<sf::Texture>::Instance().get(treeTextureId), true);
+	Utilities::setOrigin(sprTree, Origins::BC);
 
 	objpoolEffectLog.setResourceId("graphics/log.png");
 
 	sf::Vector2f originBranch;
 
 	originBranch.x = sprTree.getLocalBounds().width * -0.5f;
-	sf::Texture& branchtex = ResourceMgr<sf::Texture>::Instance().Get(branchTextureId);
+	sf::Texture& branchtex = ResourceMgr<sf::Texture>::Instance().get(branchTextureId);
 	originBranch.y = branchtex.getSize().y * 0.5f;
 
 	for (int i = 0;i < cntBranch;++i)
@@ -91,7 +91,7 @@ void TreeGo::release()
 
 void TreeGo::reset()
 {
-	sprTree.setTexture(ResourceMgr<sf::Texture>::Instance().Get(treeTextureId), true);
+	sprTree.setTexture(ResourceMgr<sf::Texture>::Instance().get(treeTextureId), true);
 
 	for (auto branch : lstBranch)
 	{

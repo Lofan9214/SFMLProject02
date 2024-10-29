@@ -8,7 +8,7 @@ TextGo::TextGo(const std::string& fontId, const std::string& name)
 
 void TextGo::reset()
 {
-	text.setFont(ResourceMgr<sf::Font>::Instance().Get(strFontId));
+	text.setFont(ResourceMgr<sf::Font>::Instance().get(strFontId));
 	setOrigin(eOrigin);
 }
 
@@ -23,7 +23,7 @@ void TextGo::setOrigin(Origins preset)
 	if (preset < Origins::Custom)
 	{
 		eOrigin = preset;
-		vOrigin = Utilities::SetOrigin(text, preset);
+		vOrigin = Utilities::setOrigin(text, preset);
 	}
 }
 

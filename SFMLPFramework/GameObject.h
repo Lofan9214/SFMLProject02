@@ -56,7 +56,7 @@ public:
 	void setRotation(float iRotation) { fRotation = iRotation; }
 
 	sf::Vector2f getScale() const { return vScale; }
-	void setScale(const sf::Vector2f iScale) { vScale = iScale; }
+	virtual void setScale(const sf::Vector2f& iScale) { vScale = iScale; }
 
 	virtual bool getFlipX() const { return bFlipX; }
 	virtual void setFlipX(bool flipx);

@@ -24,7 +24,7 @@ void SpriteGo::setOrigin(Origins preset)
 	if (preset < Origins::Custom)
 	{
 		eOrigin = preset;
-		vOrigin = Utilities::SetOrigin(sprite, preset);
+		vOrigin = Utilities::setOrigin(sprite, preset);
 	}
 }
 
@@ -49,7 +49,7 @@ void SpriteGo::setFlipY(bool flipY)
 void SpriteGo::reset()
 {
 	auto& texResMgr = ResourceMgr<sf::Texture>::Instance();
-	sprite.setTexture(texResMgr.Get(textureId));
+	sprite.setTexture(texResMgr.get(textureId));
 	sprite.setScale(vScale);
 	setOrigin(eOrigin);
 }

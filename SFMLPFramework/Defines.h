@@ -22,8 +22,8 @@ enum class Origins
 
 enum class Sides
 {
-	Rand,
-	None,
 	Left,
 	Right,
+	None,
+	Rand,
 };

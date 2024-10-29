@@ -4,6 +4,7 @@
 #include "CloudGo.h"
 #include "BeeGo.h"
 #include "TreeGo.h"
+#include "PlayerGo.h"
 
 SceneDev1::SceneDev1()
 	:Scene(SceneIds::Dev1)
@@ -18,10 +19,17 @@ void SceneDev1::init()
 
 	auto obj2 = addGo(new TextGo("fonts/KOMIKAP_.ttf", "SceneDev1"));
 
-	ResourceMgr<sf::Texture>::Instance().Load("graphics/tree.png");
-	ResourceMgr<sf::Texture>::Instance().Load("graphics/branch.png");
-	tree = addGo(new TreeGo("Tree"));
-	tree->setPosition({ 1920.f * 0.5, 900.f });
+	ResourceMgr<sf::Texture>::Instance().load("graphics/player.png");
+	ResourceMgr<sf::Texture>::Instance().load("graphics/rip.png");
+	ResourceMgr<sf::Texture>::Instance().load("graphics/axe.png");
+	ResourceMgr<sf::Texture>::Instance().load("graphics/tree.png");
+	ResourceMgr<sf::Texture>::Instance().load("graphics/branch.png");
+	ptrTree = addGo(new TreeGo("Tree"));
+	ptrTree->setPosition({ 1920.f * 0.5, 900.f });
+
+	ptrPlayer = addGo(new PlayerGo("Player"));
+	ptrPlayer->setPosition({ 1920.f * 0.5, 900.f });
+
 
 	obj->setOrigin(Origins::MC);
 	obj->setPosition({ 960.f, 540.f });
@@ -49,13 +57,13 @@ void SceneDev1::enter()
 {
 	std::cout << "SceneDev1::enter()" << std::endl;
 
-	ResourceMgr<sf::Texture>::Instance().Load("graphics/log.png");
-	ResourceMgr<sf::Texture>::Instance().Load("graphics/tree.png");
-	ResourceMgr<sf::Texture>::Instance().Load("graphics/branch.png");
-	ResourceMgr<sf::Texture>::Instance().Load("graphics/background.png");
-	ResourceMgr<sf::Texture>::Instance().Load("graphics/cloud.png");
-	ResourceMgr<sf::Texture>::Instance().Load("graphics/bee.png");
-	ResourceMgr<sf::Font>::Instance().Load("fonts/KOMIKAP_.ttf");
+	ResourceMgr<sf::Texture>::Instance().load("graphics/log.png");
+	ResourceMgr<sf::Texture>::Instance().load("graphics/tree.png");
+	ResourceMgr<sf::Texture>::Instance().load("graphics/branch.png");
+	ResourceMgr<sf::Texture>::Instance().load("graphics/background.png");
+	ResourceMgr<sf::Texture>::Instance().load("graphics/cloud.png");
+	ResourceMgr<sf::Texture>::Instance().load("graphics/bee.png");
+	ResourceMgr<sf::Font>::Instance().load("fonts/KOMIKAP_.ttf");
 
 	Scene::enter();
 }
@@ -66,13 +74,13 @@ void SceneDev1::exit()
 
 	Scene::exit();
 
-	ResourceMgr<sf::Texture>::Instance().Unload("graphics/log.png");
-	ResourceMgr<sf::Texture>::Instance().Unload("graphics/tree.png");
-	ResourceMgr<sf::Texture>::Instance().Unload("graphics/branch.png");
-	ResourceMgr<sf::Texture>::Instance().Unload("graphics/background.png");
-	ResourceMgr<sf::Texture>::Instance().Unload("graphics/cloud.png");
-	ResourceMgr<sf::Texture>::Instance().Unload("graphics/bee.png");
-	ResourceMgr<sf::Font>::Instance().Unload("fonts/KOMIKAP_.ttf");
+	ResourceMgr<sf::Texture>::Instance().unload("graphics/log.png");
+	ResourceMgr<sf::Texture>::Instance().unload("graphics/tree.png");
+	ResourceMgr<sf::Texture>::Instance().unload("graphics/branch.png");
+	ResourceMgr<sf::Texture>::Instance().unload("graphics/background.png");
+	ResourceMgr<sf::Texture>::Instance().unload("graphics/cloud.png");
+	ResourceMgr<sf::Texture>::Instance().unload("graphics/bee.png");
+	ResourceMgr<sf::Font>::Instance().unload("fonts/KOMIKAP_.ttf");
 }
 
 void SceneDev1::update(float dt)

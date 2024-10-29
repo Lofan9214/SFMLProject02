@@ -11,8 +11,8 @@ private:
 public:
 #pragma region 오리진 설정
 
-	static sf::Vector2f SetOrigin(sf::Sprite& obj, Origins preset);
-	static sf::Vector2f SetOrigin(sf::Text& obj, Origins preset);
+	static sf::Vector2f setOrigin(sf::Sprite& obj, Origins preset);
+	static sf::Vector2f setOrigin(sf::Text& obj, Origins preset);
 
 #pragma endregion
 

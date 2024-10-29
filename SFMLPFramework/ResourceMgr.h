@@ -13,21 +13,21 @@ protected:
 	ResourceMgr& operator=(const ResourceMgr&) = delete;
 
 	static T Empty;
-	void UnloadAll();
+	void unloadAll();
 public:
-	bool Load(const std::string& id);
-	bool Unload(const std::string& id);
-	T& Get(const std::string& id);
+	bool load(const std::string& id);
+	bool unload(const std::string& id);
+	T& get(const std::string& id);
 };
 
 template<typename T>
 inline ResourceMgr<T>::~ResourceMgr()
 {
-	UnloadAll();
+	unloadAll();
 }
 
 template<typename T>
-inline void ResourceMgr<T>::UnloadAll()
+inline void ResourceMgr<T>::unloadAll()
 {
 	for (auto& pair : resources)
 	{
@@ -37,7 +37,7 @@ inline void ResourceMgr<T>::UnloadAll()
 }
 
 template<typename T>
-inline bool ResourceMgr<T>::Load(const std::string& id)
+inline bool ResourceMgr<T>::load(const std::string& id)
 {
 	auto it = resources.find(id);
 	if (it != resources.end())
@@ -59,7 +59,7 @@ inline bool ResourceMgr<T>::Load(const std::string& id)
 }
 
 template<typename T>
-inline bool ResourceMgr<T>::Unload(const std::string& id)
+inline bool ResourceMgr<T>::unload(const std::string& id)
 {
 	auto it = resources.find(id);
 	if (it != resources.end())
@@ -74,7 +74,7 @@ inline bool ResourceMgr<T>::Unload(const std::string& id)
 }
 
 template<typename T>
-inline T& ResourceMgr<T>::Get(const std::string& id)
+inline T& ResourceMgr<T>::get(const std::string& id)
 {
 	auto it = resources.find(id);
 	if (it == resources.end())

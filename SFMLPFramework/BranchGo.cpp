@@ -25,7 +25,7 @@ void BranchGo::setSide(Sides side)
 		setFlipX(false);
 		break;
 	case Sides::Rand:
-		setSide((Sides)Utilities::randInt((int)Sides::None, (int)Sides::Right));
+		setSide((Sides)Utilities::randInt((int)Sides::Left, (int)Sides::None));
 		break;
 	default:
 		bActive = false;

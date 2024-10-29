@@ -14,14 +14,14 @@ sf::Vector2f Utilities::genOrigin(const sf::FloatRect& objrect, Origins preset)
 	return newOrigin;
 }
 
-sf::Vector2f Utilities::SetOrigin(sf::Sprite& obj, Origins preset)
+sf::Vector2f Utilities::setOrigin(sf::Sprite& obj, Origins preset)
 {
 	sf::Vector2f neworigin = genOrigin(obj.getLocalBounds(), preset);
 	obj.setOrigin(neworigin);
 	return neworigin;
 }
 
-sf::Vector2f Utilities::SetOrigin(sf::Text& obj, Origins preset)
+sf::Vector2f Utilities::setOrigin(sf::Text& obj, Origins preset)
 {
 	sf::Vector2f neworigin = genOrigin(obj.getLocalBounds(), preset);
 	obj.setOrigin(neworigin);
