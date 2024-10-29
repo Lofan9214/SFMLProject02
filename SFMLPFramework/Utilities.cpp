@@ -4,28 +4,31 @@
 std::mt19937 Utilities::generator;
 const float Utilities::PI = acosf(-1);
 
-sf::Vector2f Utilities::genOrigin(const sf::FloatRect& objrect, Origins preset)
+sf::Vector2f Utilities::setOrigin(sf::Transformable& obj, Origins preset, const sf::FloatRect& objRect)
 {
 	sf::Vector2f newOrigin;
 
-	newOrigin.x = objrect.left + objrect.width * ((int)preset % 3) * 0.5f;
-	newOrigin.y = objrect.top + objrect.height * ((int)preset / 3) * 0.5f;
+	newOrigin.x = objRect.left + objRect.width * ((int)preset % 3) * 0.5f;
+	newOrigin.y = objRect.top + objRect.height * ((int)preset / 3) * 0.5f;
+
+	obj.setOrigin(newOrigin);
 
 	return newOrigin;
 }
 
 sf::Vector2f Utilities::setOrigin(sf::Sprite& obj, Origins preset)
 {
-	sf::Vector2f neworigin = genOrigin(obj.getLocalBounds(), preset);
-	obj.setOrigin(neworigin);
-	return neworigin;
+	return setOrigin(obj, preset, obj.getLocalBounds());
 }
 
 sf::Vector2f Utilities::setOrigin(sf::Text& obj, Origins preset)
 {
-	sf::Vector2f neworigin = genOrigin(obj.getLocalBounds(), preset);
-	obj.setOrigin(neworigin);
-	return neworigin;
+	return setOrigin(obj, preset, obj.getLocalBounds());
+}
+
+sf::Vector2f Utilities::setOrigin(sf::Shape& obj, Origins preset)
+{
+	return setOrigin(obj, preset, obj.getLocalBounds());
 }
 
 void Utilities::init()
@@ -34,15 +37,15 @@ void Utilities::init()
 	generator.seed(rd());
 }
 
-float Utilities::randFloat(float min, float max)
+float Utilities::randFloat(float iMin, float iMax)
 {
-	std::uniform_real_distribution<> dist(min, max);
+	std::uniform_real_distribution<> dist(iMin, iMax);
 	return dist(generator);
 }
 
-int Utilities::randInt(int min, int max)
+int Utilities::randInt(int iMin, int iMax)
 {
-	std::uniform_int_distribution<> dist(min, max);
+	std::uniform_int_distribution<> dist(iMin, iMax);
 	return dist(generator);
 }
 
@@ -71,4 +74,18 @@ float Utilities::rad2deg(float iRad)
 float Utilities::deg2rad(float iDeg)
 {
 	return iDeg / 180.f * Utilities::PI;
+}
+
+float Utilities::clamp(float iValue, float iMin, float iMax)
+{
+	if (iValue < iMin)
+	{
+		return iMin;
+	}
+	if (iValue > iMax)
+	{
+		return iMax;
+	}
+
+	return iValue;
 }

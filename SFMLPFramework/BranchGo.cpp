@@ -9,6 +9,7 @@ BranchGo::BranchGo(const std::string& texId, const std::string& name)
 void BranchGo::reset()
 {
 	SpriteGo::reset();
+	setSide(Sides::Rand);
 }
 
 void BranchGo::setSide(Sides side)

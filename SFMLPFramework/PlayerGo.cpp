@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PlayerGo.h"
+#include "SceneDev1.h"
 
 PlayerGo::PlayerGo(const std::string& iName)
 	:GameObject(iName)
@@ -11,14 +12,7 @@ void PlayerGo::setSide(Sides iSide)
 	eSide = iSide;
 	sf::Vector2f vNewPos = vPosition + vPlayerLocalPos[(int)eSide];
 
-	if (eSide == Sides::Left)
-	{
-		setScale({ -1.f,1.f });
-	}
-	else
-	{
-		setScale({ 1.f,1.f });
-	}
+	setFlipX(!(bool)eSide);
 
 	sprPlayer.setPosition(vNewPos);
 	sprAxe.setPosition(vNewPos + vAxeLocalPos);
@@ -61,6 +55,12 @@ void PlayerGo::setOrigin(const sf::Vector2f& iVOrigin)
 	sprPlayer.setOrigin(vOrigin);
 }
 
+void PlayerGo::setFlipX(bool bFlipX)
+{
+	GameObject::setFlipX(bFlipX);
+	setScale(vScale);
+}
+
 void PlayerGo::init()
 {
 	GameObject::init();
@@ -83,33 +83,30 @@ void PlayerGo::reset()
 	bAlive = true;
 	bChopping = false;
 
-	setPosition(vPosition);
+	sprPlayer.setTexture(ResourceMgr<sf::Texture>::Instance().get(strTexIdPlayer));
+	sprAxe.setTexture(ResourceMgr<sf::Texture>::Instance().get(strTexIdAxe));
+	sprRip.setTexture(ResourceMgr<sf::Texture>::Instance().get(strTexIdRip));
+
 	setSide(Sides::Right);
 }
 
 void PlayerGo::update(float dt)
 {
-	if (InputMgr::isKeyDown(sf::Keyboard::Num2))
-	{
-		reset();
-	}
-	if (!bAlive)
+	if (currentScene == nullptr || currentScene->getStatus() != SceneDev1::Status::InGame)
 	{
 		return;
 	}
 
-	if (InputMgr::isKeyDown(sf::Keyboard::Num1))
-	{
-		onDie();
-	}
 	if (InputMgr::isKeyDown(sf::Keyboard::Left))
 	{
 		setSide(Sides::Left);
+		currentScene->OnChop(Sides::Left);
 		bChopping = true;
 	}
 	if (InputMgr::isKeyDown(sf::Keyboard::Right))
 	{
 		setSide(Sides::Right);
+		currentScene->OnChop(Sides::Right);
 		bChopping = true;
 	}
 	if (InputMgr::isKeyUp(sf::Keyboard::Left))
@@ -136,4 +133,9 @@ void PlayerGo::draw(sf::RenderWindow& window)
 	{
 		window.draw(sprRip);
 	}
+}
+
+void PlayerGo::setScene(SceneDev1* iCurrentScene)
+{
+	currentScene = iCurrentScene;
 }

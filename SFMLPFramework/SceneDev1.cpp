@@ -5,6 +5,8 @@
 #include "BeeGo.h"
 #include "TreeGo.h"
 #include "PlayerGo.h"
+#include "UiScore.h"
+#include "UiTimebar.h"
 
 SceneDev1::SceneDev1()
 	:Scene(SceneIds::Dev1)
@@ -15,27 +17,22 @@ void SceneDev1::init()
 {
 	std::cout << "SceneDev1::init()" << std::endl;
 
-	auto obj = addGo(new SpriteGo("graphics/background.png", "BackGround"));
-
-	auto obj2 = addGo(new TextGo("fonts/KOMIKAP_.ttf", "SceneDev1"));
-
 	ResourceMgr<sf::Texture>::Instance().load("graphics/player.png");
 	ResourceMgr<sf::Texture>::Instance().load("graphics/rip.png");
 	ResourceMgr<sf::Texture>::Instance().load("graphics/axe.png");
 	ResourceMgr<sf::Texture>::Instance().load("graphics/tree.png");
 	ResourceMgr<sf::Texture>::Instance().load("graphics/branch.png");
+
+	auto sprBG = addGo(new SpriteGo("graphics/background.png", "BackGround"));
+
+	auto txtScene = addGo(new TextGo("fonts/KOMIKAP_.ttf", "SceneDev1"));
+
 	ptrTree = addGo(new TreeGo("Tree"));
-	ptrTree->setPosition({ 1920.f * 0.5, 900.f });
-
 	ptrPlayer = addGo(new PlayerGo("Player"));
-	ptrPlayer->setPosition({ 1920.f * 0.5, 900.f });
 
-
-	obj->setOrigin(Origins::MC);
-	obj->setPosition({ 960.f, 540.f });
-
-	obj2->setOrigin(Origins::MC);
-	obj2->setPosition({ 100.f, 100.f });
+	txtCenterMessage = addGo(new TextGo("fonts/KOMIKAP_.ttf", "CenterMessage"));
+	uiScore = addGo(new UiScore("fonts/KOMIKAP_.ttf","UIScore"));
+	uiTimebar = addGo(new UiTimebar("UITimebar"));
 
 	for (int i = 0;i < 3;++i)
 	{
@@ -49,8 +46,28 @@ void SceneDev1::init()
 		bobj->setBounds({ -300.f,2200.f });
 	}
 
-
 	Scene::init();
+
+	ptrTree->setPosition({ 1920.f * 0.5f, 900.f });
+	ptrPlayer->setPosition({ 1920.f * 0.5f, 900.f });
+	sprBG->setOrigin(Origins::MC);
+	sprBG->setPosition({ 1920.f * 0.5f, 1080.f * 0.5f });
+
+	txtScene->setOrigin(Origins::MC);
+	txtScene->setPosition({ 100.f, 100.f });
+
+	txtCenterMessage->setCharSize(100);
+	txtCenterMessage->setTextColor(sf::Color::Red);
+	txtCenterMessage->setOrigin(Origins::MC);
+	txtCenterMessage->setPosition({ 1920.f * 0.5f, 1080.f * 0.5f });
+
+	uiScore->setCharSize(40);
+	uiScore->setTextColor(sf::Color::White);
+	uiScore->setPosition({ 1920.f * 0.01f, 1080.f * 0.01f });
+
+	uiTimebar->setOrigin(Origins::ML);
+	uiTimebar->setTimebar({500.f,100.f},sf::Color::Red);
+	uiTimebar->setPosition({ 1920.f * 0.5f-250.f, 1080.f * 0.9f });
 }
 
 void SceneDev1::enter()
@@ -66,6 +83,8 @@ void SceneDev1::enter()
 	ResourceMgr<sf::Font>::Instance().load("fonts/KOMIKAP_.ttf");
 
 	Scene::enter();
+	ptrPlayer->setScene(this);
+	setStatus(Status::Awake);
 }
 
 void SceneDev1::exit()
@@ -91,9 +110,140 @@ void SceneDev1::update(float dt)
 	{
 		SceneMgr::Instance().setCurrentScene(SceneIds::Dev2);
 	}
+
+	switch (eStatus)
+	{
+	case Status::Awake:
+		updateAwake(dt);
+		break;
+	case Status::GameOver:
+		updateGameOver(dt);
+		break;
+	case Status::InGame:
+		updateInGame(dt);
+		break;
+	case Status::Pause:
+		updatePause(dt);
+		break;
+	}
 }
 
 void SceneDev1::draw(sf::RenderWindow& window)
 {
 	Scene::draw(window);
+}
+
+void SceneDev1::setCenterMessage(const std::string& iMessage)
+{
+	txtCenterMessage->setString(iMessage);
+}
+
+void SceneDev1::setVisibleCenterMessage(bool iVisible)
+{
+	txtCenterMessage->setDraw(iVisible);
+}
+
+void SceneDev1::setScore(int iScore)
+{
+	score = iScore;
+	uiScore->setScore(score);
+}
+
+void SceneDev1::setStatus(Status iStatus)
+{
+	Status prvStatus = eStatus;
+	eStatus = iStatus;
+	switch (eStatus)
+	{
+	case Status::Awake:
+		Framework::Instance().setTimeScale(0.f);
+		setVisibleCenterMessage(true);
+		setCenterMessage("Press Enter To Start");
+		setScore(0);
+		timer = endTime;
+		uiTimebar->setValue(1.f);
+		break;
+	case Status::InGame:
+		if (prvStatus == Status::GameOver)
+		{
+			setScore(0);
+			timer = endTime;
+			uiTimebar->setValue(1.f);
+
+			ptrPlayer->reset();
+			ptrTree->reset();
+		}
+		Framework::Instance().setTimeScale(1.f);
+		setVisibleCenterMessage(false);
+
+		break;
+	case Status::GameOver:
+		Framework::Instance().setTimeScale(0.f);
+		setVisibleCenterMessage(true);
+		break;
+	case Status::Pause:
+		Framework::Instance().setTimeScale(0.f);
+		setCenterMessage("PAUSED! ESC TO RESUME");
+		setVisibleCenterMessage(true);
+		break;
+	}
+}
+
+void SceneDev1::updateAwake(float dt)
+{
+	if (InputMgr::isKeyDown(sf::Keyboard::Enter))
+	{
+		setStatus(Status::InGame);
+	}
+}
+
+void SceneDev1::updateInGame(float dt)
+{
+	if (InputMgr::isKeyDown(sf::Keyboard::Escape))
+	{
+		setStatus(Status::Pause);
+		return;
+	}
+
+	timer = Utilities::clamp(timer -= dt, 0.f, endTime);
+	uiTimebar->setValue(timer / endTime);
+	if (timer <= 0.f)
+	{
+		ptrPlayer->onDie();
+		setCenterMessage("TIME OVER!!!");
+		setStatus(Status::GameOver);
+		return;
+	}
+}
+
+void SceneDev1::updateGameOver(float dt)
+{
+	if (InputMgr::isKeyDown(sf::Keyboard::Enter))
+	{
+		setStatus(Status::InGame);
+	}
+}
+
+void SceneDev1::updatePause(float dt)
+{
+	if (InputMgr::isKeyDown(sf::Keyboard::Escape))
+	{
+		setStatus(Status::InGame);
+	}
+}
+
+void SceneDev1::OnChop(Sides side)
+{
+	Sides branchSide = ptrTree->chop(side);
+	if (ptrPlayer->getSide() == branchSide)
+	{
+		ptrPlayer->onDie();
+		setCenterMessage("You Died");
+		setStatus(Status::GameOver);
+	}
+	else
+	{
+		setScore(score + 100);
+		timer = Utilities::clamp(timer + 1.f, 0.f, endTime);
+	}
 }

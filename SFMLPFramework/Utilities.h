@@ -6,13 +6,14 @@ private:
 	
 #pragma endregion
 
-	static sf::Vector2f genOrigin(const sf::FloatRect& objrect, Origins preset);
+	static sf::Vector2f setOrigin(sf::Transformable& obj, Origins preset, const sf::FloatRect& objRect);
 
 public:
 #pragma region 오리진 설정
 
 	static sf::Vector2f setOrigin(sf::Sprite& obj, Origins preset);
 	static sf::Vector2f setOrigin(sf::Text& obj, Origins preset);
+	static sf::Vector2f setOrigin(sf::Shape& obj, Origins preset);
 
 #pragma endregion
 
@@ -22,8 +23,8 @@ public:
 
 	static void init();
 
-	static float randFloat(float min, float max);
-	static int randInt(int min, int max);
+	static float randFloat(float iMin, float iMax);
+	static int randInt(int iMin, int iMax);
 	static float rand0to1();
 	static sf::Vector2f randOnUnitCircle();
 	static sf::Vector2f randInUnitCircle();
@@ -38,5 +39,7 @@ public:
 	static float deg2rad(float iDeg);
 
 #pragma endregion
+
+	static float clamp(float iValue, float iMin, float iMax);
 };
 

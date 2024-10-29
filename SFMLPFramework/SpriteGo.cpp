@@ -48,8 +48,7 @@ void SpriteGo::setFlipY(bool flipY)
 
 void SpriteGo::reset()
 {
-	auto& texResMgr = ResourceMgr<sf::Texture>::Instance();
-	sprite.setTexture(texResMgr.get(textureId));
+	sprite.setTexture(ResourceMgr<sf::Texture>::Instance().get(textureId));
 	sprite.setScale(vScale);
 	setOrigin(eOrigin);
 }

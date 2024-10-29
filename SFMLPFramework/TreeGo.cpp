@@ -14,7 +14,6 @@ TreeGo::~TreeGo()
 
 Sides TreeGo::chop(Sides side)
 {
-
 	if (side == Sides::Left)
 	{
 		EffectLog* effect = objpoolEffectLog.take();
@@ -38,7 +37,7 @@ Sides TreeGo::chop(Sides side)
 	lstBranch.push_back(temp);
 	updateBranchPos();
 
-	return Sides();
+	return lstBranch.front()->getSide();
 }
 
 void TreeGo::updateBranchPos()
@@ -97,21 +96,13 @@ void TreeGo::reset()
 	{
 		branch->reset();
 	}
+	lstBranch.front()->setSide(Sides::None);
 
 	updateBranchPos();
 }
 
 void TreeGo::update(float dt)
 {
-	if (InputMgr::isKeyDown(sf::Keyboard::Left))
-	{
-		chop(Sides::Left);
-	}
-	if (InputMgr::isKeyDown(sf::Keyboard::Right))
-	{
-		chop(Sides::Right);
-	}
-
 	for (auto branch : lstBranch)
 	{
 		if (branch->getActive())

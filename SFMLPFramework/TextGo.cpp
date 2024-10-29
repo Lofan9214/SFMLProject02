@@ -34,7 +34,25 @@ void TextGo::setOrigin(const sf::Vector2f& vNewOrigin)
 	text.setOrigin(vOrigin);
 }
 
+void TextGo::setPosition(const sf::Vector2f& iPos)
+{
+	GameObject::setPosition(iPos);
+	text.setPosition(vPosition);
+}
+
 void TextGo::setString(const std::string& strChange)
 {
 	text.setString(strChange);
+	setOrigin(eOrigin);
+}
+
+void TextGo::setCharSize(unsigned int iSize)
+{
+	text.setCharacterSize(iSize);
+	setOrigin(eOrigin);
+}
+
+void TextGo::setTextColor(const sf::Color& iColor)
+{
+	text.setFillColor(iColor);
 }
