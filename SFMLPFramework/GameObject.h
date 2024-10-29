@@ -6,7 +6,7 @@ protected:
 	bool bActive = true;
 	bool bDraw = true;
 
-	std::string name;
+	std::string strName;
 
 	Origins eOrigin;
 	sf::Vector2f vOrigin;
@@ -38,8 +38,8 @@ public:
 	bool getDraw() const { return bDraw; }
 	void setDraw(bool iDraw) { bDraw = iDraw; }
 
-	const std::string& getName() { return name; }
-	void setName(const std::string& iName) { name = iName; }
+	const std::string& getName() { return strName; }
+	void setName(const std::string& iName) { strName = iName; }
 
 	sf::Vector2f getOrigin() const { return vOrigin; }
 	virtual void setOrigin(Origins iOrigin);

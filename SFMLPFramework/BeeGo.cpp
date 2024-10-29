@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "BeeGo.h"
 
-BeeGo::BeeGo(const std::string& texId, const std::string& name)
-	:SpriteGo(texId, name), vRangeSpeed(300.f, 400.f), vRangeScale(1.f, 2.f)
+BeeGo::BeeGo(const std::string& iTexId, const std::string& iName)
+	:SpriteGo(iTexId, iName), vRangeSpeed(300.f, 400.f), vRangeScale(1.f, 2.f)
 {
 }
 
@@ -33,6 +33,7 @@ void BeeGo::update(float dt)
 {
 	vPosition.x += vSpeed.x * dt;
 	vPosition.y += vSpeed.y * dt * sinf(Framework::Instance().getGameTime() * 3.14f);
+	//적분이므로 y 진폭은 vSpeed.y/3.14f
 
 	setPosition(vPosition);
 

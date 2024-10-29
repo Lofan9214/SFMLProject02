@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "UiScore.h"
 
-UiScore::UiScore(const std::string& fontId, const std::string& name)
-	:TextGo(fontId, name)
+UiScore::UiScore(const std::string& iFontId, const std::string& iName)
+	:TextGo(iFontId, iName)
 {
 }
 
@@ -14,6 +14,6 @@ void UiScore::reset()
 
 void UiScore::setScore(int iScore)
 {
-	score = iScore;
-	text.setString(strFormat + std::to_string(score));
+	dScore = iScore;
+	textObj.setString(strFormat + std::to_string(dScore));
 }

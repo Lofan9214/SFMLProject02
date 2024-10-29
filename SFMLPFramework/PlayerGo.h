@@ -26,7 +26,10 @@ protected:
 	bool bAlive = true;
 	bool bChopping = false;
 
-	SceneDev1* currentScene = nullptr;
+	SceneDev1* ptrSceneDev1 = nullptr;
+
+	PlayerGo(const PlayerGo&) = delete;
+	PlayerGo& operator=(const PlayerGo&) = delete;
 
 public:
 	PlayerGo(const std::string& iName = "");
@@ -50,6 +53,6 @@ public:
 	void update(float dt) override;
 	void draw(sf::RenderWindow& window) override;
 
-	void setScene(SceneDev1* iCurrentScene);
+	void setScene(SceneDev1* iPtrSceneDev1);
 };
 

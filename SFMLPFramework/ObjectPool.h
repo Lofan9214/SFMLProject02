@@ -8,6 +8,9 @@ protected:
 	std::list<T*> used;
 	std::string strResourceId = "";
 
+	ObjectPool(const ObjectPool&) = delete;
+	ObjectPool& operator=(const ObjectPool&) = delete;
+
 public:
 
 	ObjectPool(int initSize = 10)
@@ -98,6 +101,6 @@ public:
 		}
 	}
 
-	std::list<T*>& getListUsing() { return used; }
-	std::list<T*>& getListUnusing() { return unused; }
+	std::list<T*> getListUsing() const { return used; }
+	std::list<T*> getListUnusing() const { return unused; }
 };

@@ -29,9 +29,9 @@ protected:
 	UiScore* uiScore;
 	UiTimebar* uiTimebar;
 
-	int score = 0;
-	float timer = 0.f;
-	float endTime = 5.f;
+	int dScore = 0;
+	float fGameTime = 0.f;
+	float fMaxGameTime = 5.f;
 
 	SceneDev1(const SceneDev1&) = delete;
 	SceneDev1& operator=(const SceneDev1&) = delete;

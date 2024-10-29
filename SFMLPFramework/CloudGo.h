@@ -10,14 +10,17 @@ protected:
 	sf::Vector2f vBounds;
 	float fDirection = 0.f;
 
+	CloudGo(const CloudGo&) = delete;
+	CloudGo& operator=(const CloudGo&) = delete;
+
 public:
 	CloudGo(const std::string& texId, const std::string& name = "");
 	virtual ~CloudGo() = default;
 
-	void setRangeSpeed(const sf::Vector2f& rngSpeed) { vRangeSpeed = rngSpeed; }
-	void setRangeScale(const sf::Vector2f& rngScale) { vRangeScale = rngScale; }
-	void setSpeed(const sf::Vector2f& speed) { vSpeed = speed; }
-	void setBounds(const sf::Vector2f& bounds) { vBounds = bounds; }
+	void setRangeSpeed(const sf::Vector2f& iRngSpeed) { vRangeSpeed = iRngSpeed; }
+	void setRangeScale(const sf::Vector2f& iRngScale) { vRangeScale = iRngScale; }
+	void setSpeed(const sf::Vector2f& iSpeed) { vSpeed = iSpeed; }
+	void setBounds(const sf::Vector2f& iBounds) { vBounds = iBounds; }
 
 	void reset() override;
 	void update(float dt) override;

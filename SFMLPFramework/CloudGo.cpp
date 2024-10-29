@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "CloudGo.h"
 
-CloudGo::CloudGo(const std::string& texId, const std::string& name)
-	:SpriteGo(texId,name),vRangeSpeed(100.f,200.f),vRangeScale(1.f,2.f)
+CloudGo::CloudGo(const std::string& iTexId, const std::string& iName)
+	:SpriteGo(iTexId,iName),vRangeSpeed(100.f,200.f),vRangeScale(1.f,2.f)
 {
 }
 

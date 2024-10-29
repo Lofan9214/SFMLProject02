@@ -15,24 +15,24 @@ protected:
 	sf::RenderWindow window;
 
 	sf::Clock clock;
-	float timeScale = 1.f;
+	float fTimeScale = 1.f;
 
-	float gameTime = 0.f;
-	float gameDeltaTime = 0.f;
-	float realTime = 0.f;
-	float realDeltaTime = 0.f;
+	float fGameTime = 0.f;
+	float fGameDT = 0.f;
+	float fRealTime = 0.f;
+	float fRealDT = 0.f;
 
 public:
 
-	float getGameTime() const { return gameTime; }
-	float getGameDeltaTime() const { return gameDeltaTime; }
-	float getRealTime() const { return realTime; }
-	float getRealDeltaTime() const { return realDeltaTime; }
+	float getGameTime() const { return fGameTime; }
+	float getGameDeltaTime() const { return fGameDT; }
+	float getRealTime() const { return fRealTime; }
+	float getRealDeltaTime() const { return fRealDT; }
 
-	void setTimeScale(float iTimeScale) { timeScale = iTimeScale; }
-	float getTimeScale() const { return timeScale; }
+	void setTimeScale(float iTimeScale) { fTimeScale = iTimeScale; }
+	float getTimeScale() const { return fTimeScale; }
 
-	virtual void init(int width, int height, const std::string& strTitle);
+	virtual void init(int iWidth, int iHeight, const std::string& strTitle);
 	virtual void dothis();
 	virtual void release();
 };

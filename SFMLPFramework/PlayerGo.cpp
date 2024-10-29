@@ -92,7 +92,7 @@ void PlayerGo::reset()
 
 void PlayerGo::update(float dt)
 {
-	if (currentScene == nullptr || currentScene->getStatus() != SceneDev1::Status::InGame)
+	if (ptrSceneDev1 == nullptr || ptrSceneDev1->getStatus() != SceneDev1::Status::InGame)
 	{
 		return;
 	}
@@ -100,13 +100,13 @@ void PlayerGo::update(float dt)
 	if (InputMgr::isKeyDown(sf::Keyboard::Left))
 	{
 		setSide(Sides::Left);
-		currentScene->OnChop(Sides::Left);
+		ptrSceneDev1->OnChop(Sides::Left);
 		bChopping = true;
 	}
 	if (InputMgr::isKeyDown(sf::Keyboard::Right))
 	{
 		setSide(Sides::Right);
-		currentScene->OnChop(Sides::Right);
+		ptrSceneDev1->OnChop(Sides::Right);
 		bChopping = true;
 	}
 	if (InputMgr::isKeyUp(sf::Keyboard::Left))
@@ -135,7 +135,7 @@ void PlayerGo::draw(sf::RenderWindow& window)
 	}
 }
 
-void PlayerGo::setScene(SceneDev1* iCurrentScene)
+void PlayerGo::setScene(SceneDev1* iPtrSceneDev1)
 {
-	currentScene = iCurrentScene;
+	ptrSceneDev1 = iPtrSceneDev1;
 }

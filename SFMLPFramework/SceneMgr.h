@@ -7,8 +7,8 @@ class SceneMgr : public Singleton<SceneMgr>
 protected:
 	std::vector<Scene*> vecScenes;
 
-	SceneIds defaultScene = SceneIds::Dev1;
-	SceneIds currentScene;
+	SceneIds eDefaultSceneId = SceneIds::Dev1;
+	SceneIds eCurrentSceneId;
 
 	SceneMgr() = default;
 	virtual ~SceneMgr() = default;
@@ -24,8 +24,8 @@ public:
 	void update(float deltaTime);
 	void draw(sf::RenderWindow& window);
 
-	Scene* getCurrentScene() { return vecScenes[(int)currentScene]; }
-	SceneIds getCurrentSceneId() const { return currentScene; }
+	Scene* getCurrentScene() { return vecScenes[(int)eCurrentSceneId]; }
+	SceneIds getCurrentSceneId() const { return eCurrentSceneId; }
 	void setCurrentScene(SceneIds id);
 
 };

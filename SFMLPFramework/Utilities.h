@@ -6,14 +6,14 @@ private:
 	
 #pragma endregion
 
-	static sf::Vector2f setOrigin(sf::Transformable& obj, Origins preset, const sf::FloatRect& objRect);
+	static sf::Vector2f setOrigin(sf::Transformable& obj, Origins iOrigin, const sf::FloatRect& objRect);
 
 public:
 #pragma region 오리진 설정
 
-	static sf::Vector2f setOrigin(sf::Sprite& obj, Origins preset);
-	static sf::Vector2f setOrigin(sf::Text& obj, Origins preset);
-	static sf::Vector2f setOrigin(sf::Shape& obj, Origins preset);
+	static sf::Vector2f setOrigin(sf::Sprite& obj, Origins iOrigin);
+	static sf::Vector2f setOrigin(sf::Text& obj, Origins iOrigin);
+	static sf::Vector2f setOrigin(sf::Shape& obj, Origins iOrigin);
 
 #pragma endregion
 

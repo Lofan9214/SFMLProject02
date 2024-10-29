@@ -12,8 +12,8 @@ void SceneMgr::init()
 	{
 		itScene->init();
 	}
-	currentScene = defaultScene;
-	vecScenes[(int)currentScene]->enter();
+	eCurrentSceneId = eDefaultSceneId;
+	vecScenes[(int)eCurrentSceneId]->enter();
 
 }
 
@@ -27,19 +27,19 @@ void SceneMgr::release()
 	vecScenes.clear();
 }
 
-void SceneMgr::update(float deltaTime)
+void SceneMgr::update(float fDeltaTime)
 {
-	vecScenes[(int)currentScene]->update(deltaTime);
+	vecScenes[(int)eCurrentSceneId]->update(fDeltaTime);
 }
 
 void SceneMgr::draw(sf::RenderWindow& window)
 {
-	vecScenes[(int)currentScene]->draw(window);
+	vecScenes[(int)eCurrentSceneId]->draw(window);
 }
 
-void SceneMgr::setCurrentScene(SceneIds id)
+void SceneMgr::setCurrentScene(SceneIds iSceneId)
 {
-	vecScenes[(int)currentScene]->exit();
-	currentScene = id;
-	vecScenes[(int)currentScene]->enter();
+	vecScenes[(int)eCurrentSceneId]->exit();
+	eCurrentSceneId = iSceneId;
+	vecScenes[(int)eCurrentSceneId]->enter();
 }

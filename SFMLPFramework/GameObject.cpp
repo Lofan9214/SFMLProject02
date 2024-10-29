@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 GameObject::GameObject(const std::string& iName)
-	:name(name), eOrigin(Origins::TL), vOrigin(0.f, 0.f), vScale(1.f, 1.f)
+	:strName(iName), eOrigin(Origins::TL), vOrigin(0.f, 0.f), vScale(1.f, 1.f)
 {
 }
 

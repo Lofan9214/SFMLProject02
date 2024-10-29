@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "EffectLog.h"
 
-EffectLog::EffectLog(const std::string& texId, const std::string& name)
-	:SpriteGo(texId,name)
+EffectLog::EffectLog(const std::string& iTexId, const std::string& iName)
+	:SpriteGo(iTexId, iName)
 {
 }
 
@@ -12,8 +12,8 @@ EffectLog::~EffectLog()
 
 void EffectLog::update(float dt)
 {
-	timer += dt;
-	if (timer > duration)
+	fTimer += dt;
+	if (fTimer > fDuration)
 	{
 		bActive = false;
 		return;
@@ -22,10 +22,10 @@ void EffectLog::update(float dt)
 	setPosition(vPosition + vVelocity * dt);
 }
 
-void EffectLog::fire(const sf::Vector2f& pos, const sf::Vector2f& vel)
+void EffectLog::fire(const sf::Vector2f& iPosition, const sf::Vector2f& iVelocity)
 {
 	bActive = true;
-	vVelocity = vel;
-	vPosition = pos;
-	timer = 0.f;
+	vVelocity = iVelocity;
+	vPosition = iPosition;
+	fTimer = 0.f;
 }

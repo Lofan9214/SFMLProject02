@@ -27,18 +27,18 @@ void SceneDev1::init()
 
 	auto txtScene = addGo(new TextGo("fonts/KOMIKAP_.ttf", "SceneDev1"));
 
+	for (int i = 0;i < 3;++i)
+	{
+		CloudGo* cobj = addGo(new CloudGo("graphics/cloud.png"));
+		cobj->setBounds({ -300.f,2200.f });
+	}
+
 	ptrTree = addGo(new TreeGo("Tree"));
 	ptrPlayer = addGo(new PlayerGo("Player"));
 
 	txtCenterMessage = addGo(new TextGo("fonts/KOMIKAP_.ttf", "CenterMessage"));
 	uiScore = addGo(new UiScore("fonts/KOMIKAP_.ttf","UIScore"));
 	uiTimebar = addGo(new UiTimebar("UITimebar"));
-
-	for (int i = 0;i < 3;++i)
-	{
-		CloudGo* cobj = addGo(new CloudGo("graphics/cloud.png"));
-		cobj->setBounds({ -300.f,2200.f });
-	}
 
 	for (int i = 0;i < 3;++i)
 	{
@@ -145,8 +145,8 @@ void SceneDev1::setVisibleCenterMessage(bool iVisible)
 
 void SceneDev1::setScore(int iScore)
 {
-	score = iScore;
-	uiScore->setScore(score);
+	dScore = iScore;
+	uiScore->setScore(dScore);
 }
 
 void SceneDev1::setStatus(Status iStatus)
@@ -160,14 +160,14 @@ void SceneDev1::setStatus(Status iStatus)
 		setVisibleCenterMessage(true);
 		setCenterMessage("Press Enter To Start");
 		setScore(0);
-		timer = endTime;
+		fGameTime = fMaxGameTime;
 		uiTimebar->setValue(1.f);
 		break;
 	case Status::InGame:
 		if (prvStatus == Status::GameOver)
 		{
 			setScore(0);
-			timer = endTime;
+			fGameTime = fMaxGameTime;
 			uiTimebar->setValue(1.f);
 
 			ptrPlayer->reset();
@@ -205,9 +205,9 @@ void SceneDev1::updateInGame(float dt)
 		return;
 	}
 
-	timer = Utilities::clamp(timer -= dt, 0.f, endTime);
-	uiTimebar->setValue(timer / endTime);
-	if (timer <= 0.f)
+	fGameTime = Utilities::clamp(fGameTime -= dt, 0.f, fMaxGameTime);
+	uiTimebar->setValue(fGameTime / fMaxGameTime);
+	if (fGameTime <= 0.f)
 	{
 		ptrPlayer->onDie();
 		setCenterMessage("TIME OVER!!!");
@@ -232,9 +232,9 @@ void SceneDev1::updatePause(float dt)
 	}
 }
 
-void SceneDev1::OnChop(Sides side)
+void SceneDev1::OnChop(Sides iSide)
 {
-	Sides branchSide = ptrTree->chop(side);
+	Sides branchSide = ptrTree->chop(iSide);
 	if (ptrPlayer->getSide() == branchSide)
 	{
 		ptrPlayer->onDie();
@@ -243,7 +243,7 @@ void SceneDev1::OnChop(Sides side)
 	}
 	else
 	{
-		setScore(score + 100);
-		timer = Utilities::clamp(timer + 1.f, 0.f, endTime);
+		setScore(dScore + 100);
+		fGameTime = Utilities::clamp(fGameTime + 1.f, 0.f, fMaxGameTime);
 	}
 }

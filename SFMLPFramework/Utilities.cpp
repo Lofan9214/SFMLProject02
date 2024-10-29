@@ -4,31 +4,31 @@
 std::mt19937 Utilities::generator;
 const float Utilities::PI = acosf(-1);
 
-sf::Vector2f Utilities::setOrigin(sf::Transformable& obj, Origins preset, const sf::FloatRect& objRect)
+sf::Vector2f Utilities::setOrigin(sf::Transformable& obj, Origins iOrigin, const sf::FloatRect& objRect)
 {
 	sf::Vector2f newOrigin;
 
-	newOrigin.x = objRect.left + objRect.width * ((int)preset % 3) * 0.5f;
-	newOrigin.y = objRect.top + objRect.height * ((int)preset / 3) * 0.5f;
+	newOrigin.x = objRect.left + objRect.width * ((int)iOrigin % 3) * 0.5f;
+	newOrigin.y = objRect.top + objRect.height * ((int)iOrigin / 3) * 0.5f;
 
 	obj.setOrigin(newOrigin);
 
 	return newOrigin;
 }
 
-sf::Vector2f Utilities::setOrigin(sf::Sprite& obj, Origins preset)
+sf::Vector2f Utilities::setOrigin(sf::Sprite& obj, Origins iOrigin)
 {
-	return setOrigin(obj, preset, obj.getLocalBounds());
+	return setOrigin(obj, iOrigin, obj.getLocalBounds());
 }
 
-sf::Vector2f Utilities::setOrigin(sf::Text& obj, Origins preset)
+sf::Vector2f Utilities::setOrigin(sf::Text& obj, Origins iOrigin)
 {
-	return setOrigin(obj, preset, obj.getLocalBounds());
+	return setOrigin(obj, iOrigin, obj.getLocalBounds());
 }
 
-sf::Vector2f Utilities::setOrigin(sf::Shape& obj, Origins preset)
+sf::Vector2f Utilities::setOrigin(sf::Shape& obj, Origins iOrigin)
 {
-	return setOrigin(obj, preset, obj.getLocalBounds());
+	return setOrigin(obj, iOrigin, obj.getLocalBounds());
 }
 
 void Utilities::init()

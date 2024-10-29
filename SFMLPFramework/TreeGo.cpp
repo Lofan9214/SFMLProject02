@@ -2,8 +2,8 @@
 #include "TreeGo.h"
 
 
-TreeGo::TreeGo(const std::string& name)
-	:GameObject(name)
+TreeGo::TreeGo(const std::string& iName)
+	:GameObject(iName)
 {
 }
 
@@ -12,16 +12,16 @@ TreeGo::~TreeGo()
 	release();
 }
 
-Sides TreeGo::chop(Sides side)
+Sides TreeGo::chop(Sides iSide)
 {
-	if (side == Sides::Left)
+	if (iSide == Sides::Left)
 	{
 		EffectLog* effect = objpoolEffectLog.take();
 		SceneMgr::Instance().getCurrentScene()->addGo(effect);
 		effect->setOrigin(Origins::BC);
 		effect->fire(vPosition, { 1000.f,-1000.f });
 	}
-	else if (side == Sides::Right)
+	else if (iSide == Sides::Right)
 	{
 		EffectLog* effect = objpoolEffectLog.take();
 		SceneMgr::Instance().getCurrentScene()->addGo(effect);
@@ -54,7 +54,7 @@ void TreeGo::init()
 {
 	release();
 
-	sprTree.setTexture(ResourceMgr<sf::Texture>::Instance().get(treeTextureId), true);
+	sprTree.setTexture(ResourceMgr<sf::Texture>::Instance().get(strTreeTexId), true);
 	Utilities::setOrigin(sprTree, Origins::BC);
 
 	objpoolEffectLog.setResourceId("graphics/log.png");
@@ -62,12 +62,12 @@ void TreeGo::init()
 	sf::Vector2f originBranch;
 
 	originBranch.x = sprTree.getLocalBounds().width * -0.5f;
-	sf::Texture& branchtex = ResourceMgr<sf::Texture>::Instance().get(branchTextureId);
+	sf::Texture& branchtex = ResourceMgr<sf::Texture>::Instance().get(strBranchTexId);
 	originBranch.y = branchtex.getSize().y * 0.5f;
 
 	for (int i = 0;i < cntBranch;++i)
 	{
-		BranchGo* branch = new BranchGo(branchTextureId, "Branch");
+		BranchGo* branch = new BranchGo(strBranchTexId, "Branch");
 		branch->setOrigin(originBranch);
 		branch->init();
 		branch->setSide(Sides::Rand);
@@ -90,7 +90,7 @@ void TreeGo::release()
 
 void TreeGo::reset()
 {
-	sprTree.setTexture(ResourceMgr<sf::Texture>::Instance().get(treeTextureId), true);
+	sprTree.setTexture(ResourceMgr<sf::Texture>::Instance().get(strTreeTexId), true);
 
 	for (auto branch : lstBranch)
 	{
@@ -116,6 +116,7 @@ void TreeGo::update(float dt)
 
 void TreeGo::draw(sf::RenderWindow& window)
 {
+	GameObject::draw(window);
 	window.draw(sprTree);
 
 	for (auto branch : lstBranch)
@@ -125,12 +126,11 @@ void TreeGo::draw(sf::RenderWindow& window)
 			branch->draw(window);
 		}
 	}
-
 }
 
-void TreeGo::setPosition(const sf::Vector2f& pos)
+void TreeGo::setPosition(const sf::Vector2f& iPos)
 {
-	vPosition = pos;
+	GameObject::setPosition(iPos);
 	sprTree.setPosition(vPosition);
 	updateBranchPos();
 }

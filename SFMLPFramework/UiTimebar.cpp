@@ -1,22 +1,22 @@
 #include "stdafx.h"
 #include "UiTimebar.h"
 
-UiTimebar::UiTimebar(const std::string& name)
-	:GameObject(name)
+UiTimebar::UiTimebar(const std::string& iName)
+	:GameObject(iName)
 {
 }
 
-void UiTimebar::setPosition(const sf::Vector2f& pos)
+void UiTimebar::setPosition(const sf::Vector2f& iPos)
 {
-	GameObject::setPosition(pos);
+	GameObject::setPosition(iPos);
 	shpRect.setPosition(vPosition);
 }
 
-void UiTimebar::setOrigin(Origins preset)
+void UiTimebar::setOrigin(Origins iOrigin)
 {
-	if (preset < Origins::Custom)
+	if (iOrigin < Origins::Custom)
 	{
-		eOrigin = preset;
+		eOrigin = iOrigin;
 		vOrigin = Utilities::setOrigin(shpRect, eOrigin);
 	}
 }

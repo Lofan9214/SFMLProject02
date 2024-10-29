@@ -12,18 +12,21 @@ protected:
 
     int cntBranch = 6;
 
-    std::string treeTextureId = "graphics/tree.png";
-    std::string branchTextureId = "graphics/branch.png";
+    std::string strTreeTexId = "graphics/tree.png";
+    std::string strBranchTexId = "graphics/branch.png";
 
     float offsetYBranch = 150.f;
 
     ObjectPool<EffectLog> objpoolEffectLog;
 
+    TreeGo(const TreeGo&) = delete;
+    TreeGo& operator=(const TreeGo&) = delete;
+
 public:
-    TreeGo(const std::string& name = "");
+    TreeGo(const std::string& iName = "");
     virtual ~TreeGo();
 
-    Sides chop(Sides side);
+    Sides chop(Sides iSide);
     void updateBranchPos();
 
     void init() override;
@@ -34,6 +37,6 @@ public:
     void update(float dt) override;
     void draw(sf::RenderWindow& window) override;
 
-    void setPosition(const sf::Vector2f& pos) override;
+    void setPosition(const sf::Vector2f& iPos) override;
 };
 

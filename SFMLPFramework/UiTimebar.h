@@ -9,23 +9,26 @@ protected:
     sf::Vector2f vMaxSize;
     sf::Vector2f vCurrentSize;
 
+    UiTimebar(const UiTimebar&) = delete;
+    UiTimebar& operator=(const UiTimebar&) = delete;
+
 public:
-    UiTimebar(const std::string& name = "");
+    UiTimebar(const std::string& iName = "");
     virtual ~UiTimebar() = default;
 
-    void setPosition(const sf::Vector2f& pos) override;
-    void setOrigin(Origins preset) override;
-    void setOrigin(const sf::Vector2f& neworigin) override;
-    void setScale(const sf::Vector2f& iscale) override;
+    void setPosition(const sf::Vector2f& iPos) override;
+    void setOrigin(Origins iOrigin) override;
+    void setOrigin(const sf::Vector2f& iVOrigin) override;
+    void setScale(const sf::Vector2f& iScale) override;
 
     void reset() override;
 
     void draw(sf::RenderWindow& window) override;
 
     float getValue() const { return vCurrentSize.x / vMaxSize.x; }
-    void setValue(float value);
+    void setValue(float iValue);
 
-    void setTimebar(const sf::Vector2f size, const sf::Color& color);
+    void setTimebar(const sf::Vector2f iSize, const sf::Color& iColor);
 
 };
 

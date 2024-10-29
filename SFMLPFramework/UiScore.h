@@ -5,12 +5,12 @@ class UiScore :
 {
 protected:
     std::string strFormat = "SCORE : ";
-    int score = 0;
+    int dScore = 0;
 
     UiScore(const UiScore&) = delete;
     UiScore& operator=(const UiScore&) = delete;
 public:
-    UiScore(const std::string& fontId, const std::string& name = "");
+    UiScore(const std::string& iFontId, const std::string& iName = "");
     virtual ~UiScore() = default;
 
     void reset() override;

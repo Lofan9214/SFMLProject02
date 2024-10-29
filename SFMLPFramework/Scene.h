@@ -42,7 +42,7 @@ public:
 		}
 	}
 
-	virtual GameObject* findGo(const std::string& name);
-	virtual int FindGoAll(const std::string& name, std::list<GameObject*>& list);
+	virtual GameObject* findGo(const std::string& iName);
+	virtual int FindGoAll(const std::string& iName, std::list<GameObject*>& lstFoundGo);
 };
 

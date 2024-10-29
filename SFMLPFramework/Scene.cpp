@@ -70,11 +70,11 @@ void Scene::removeGo(GameObject* obj)
 	}
 }
 
-GameObject* Scene::findGo(const std::string& name)
+GameObject* Scene::findGo(const std::string& iName)
 {
 	for (auto obj : lstGameObj)
 	{
-		if (obj->getName() == name)
+		if (obj->getName() == iName)
 		{
 			return obj;
 		}
@@ -82,25 +82,25 @@ GameObject* Scene::findGo(const std::string& name)
 	return nullptr;
 }
 
-int Scene::FindGoAll(const std::string& name, std::list<GameObject*>& list)
+int Scene::FindGoAll(const std::string& iName, std::list<GameObject*>& lstFoundGo)
 {
 	int cnt = 0;
 
-	if (list.size() > 0)
+	if (lstFoundGo.size() > 0)
 	{
-		for (auto obj : list)
+		for (auto obj : lstFoundGo)
 		{
 			obj->release();
 		}
-		list.clear();
+		lstFoundGo.clear();
 	}
 
 	for (auto obj : lstGameObj)
 	{
-		if (obj->getName() == name)
+		if (obj->getName() == iName)
 		{
 			++cnt;
-			list.push_back(obj);
+			lstFoundGo.push_back(obj);
 		}
 	}
 

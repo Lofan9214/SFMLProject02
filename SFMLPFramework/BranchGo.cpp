@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "BranchGo.h"
 
-BranchGo::BranchGo(const std::string& texId, const std::string& name)
-	:SpriteGo(texId, name)
+BranchGo::BranchGo(const std::string& iTexId, const std::string& iName)
+	:SpriteGo(iTexId, iName)
 {
 }
 
@@ -12,9 +12,9 @@ void BranchGo::reset()
 	setSide(Sides::Rand);
 }
 
-void BranchGo::setSide(Sides side)
+void BranchGo::setSide(Sides iSide)
 {
-	eSide = side;
+	eSide = iSide;
 	switch (eSide)
 	{
 	case Sides::Left:
